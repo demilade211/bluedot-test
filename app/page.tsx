@@ -1,17 +1,19 @@
-import Image from "next/image";
+'use client'
+ 
+import DealsSection from "@/components/pages/home/DealsSection";
+import AppLayout from "@/layouts/AppLayout";
+import styled from 'styled-components';
 
 export default function Home() {
   return (
-    <div className=" ">
-
-      <Image
-        className="dark:invert"
-        src="https://nextjs.org/icons/next.svg"
-        alt="Next.js logo"
-        width={180}
-        height={38}
-        priority
-      />
-    </div>
+    <Con>
+      <AppLayout> 
+        <DealsSection/>
+      </AppLayout>
+    </Con>
   );
 }
+
+const Con = styled.section`  
+  width: 100%;   
+`;
