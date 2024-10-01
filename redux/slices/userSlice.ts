@@ -20,6 +20,7 @@ interface User {
   name: string;
   cartItems: CartItem[];
   wishItems: WishItem[];
+  role?:string;
 }
 
 interface UserState {

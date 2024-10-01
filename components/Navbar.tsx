@@ -107,7 +107,7 @@ const Navbar: React.FC = () => {
           </StyledMenu>
 
           <div className="per-cart-love flex items-center">
-            <div className="icon mr-1">
+            <div className="icon mr-3">
               <Badge badgeContent={cartValue} color="secondary">
                 <img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" />
               </Badge>

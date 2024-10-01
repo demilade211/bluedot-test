@@ -46,7 +46,7 @@ const DealsSection = () => {
 
           {products?.map((val, index) => (index < 4&&<ProductCard  product={val} />))}
         </div>}
-      <div className="see-all mx-6 flex items-center justify-center" onClick={() => Router.push(`/products`)}>
+      <div className="see-all mt-6 flex items-center justify-center" onClick={() => Router.push(`/products`)}>
         <p>See all</p>
       </div>
     </Con>

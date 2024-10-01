@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import AuthInput from '@/components/form/AuthInput';
-import AuthButton from '@/components/form/AuthButton.';
+import AuthButton from '@/components/form/AuthButton';
 import Link from "next/link";
 import Router from "next/router";
 import { loginUser } from "@/services/auth";

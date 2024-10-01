@@ -66,7 +66,7 @@ const Cart: React.FC = () => {
                 <p className="bot-left">Subtotal</p>
                 <p className="bot-right">{formatPrice(currency, totalCartPrice || 0)}</p>
               </div>
-              <FullBlueButton onClick={() => Router.push(`/checkout`)}>Proceed to checkout</FullBlueButton>
+              <FullBlueButton  >Proceed to checkout</FullBlueButton>
             </InSumCon>
           </GreyBox>
         </div>
