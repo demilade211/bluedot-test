@@ -8,11 +8,11 @@ const Footer = () => {
         <Con>
             <FirstRow>
                 <div className='first'>
-                    <div>
-                        <img className='logo' src="/images/components/logo.svg" alt="img" />
+                    <div className='img-con'>
+                        <img className='logo' src="/images/components/logo.png" alt="img" />
                     </div>
                     <p className='first-p'>
-                        © {currentYear} SpinelHub <br />All Rights Reserved
+                        © {currentYear} BluedotPms <br />All Rights Reserved
                     </p>
                 </div>
                 <div className='second'>
@@ -86,8 +86,14 @@ const FirstRow = styled.div`
             width: 100%;
             margin-bottom:40px;
         } 
-        .logo{
+        .img-con{
+            width: 150px;
+            height: 30px; 
             margin-bottom:10px; 
+            .logo{
+                
+                width: 100%; 
+            }
         }  
     }
     .second{   

@@ -9,10 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { StyledMenu } from '../utils/CustomStyles';
 import Avatar from '@mui/material/Avatar';
 import { stringAvatar } from "../utils/helpers";
-import { useAppSelector, useAppDispatch } from '@/redux/hooks'
-import { logOut } from "../services/auth";
+import { useAppSelector, useAppDispatch } from '@/redux/hooks' 
 import { SetCurrency } from "../redux/slices/userSlice";
-import { RootState } from '../redux/store';
+import cookie from "js-cookie"
 
 interface User {
   name: string;
@@ -62,6 +61,11 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const logOut = () => {
+    cookie.remove("token");
+    window.location.href = "/auth/login" 
+}
+
   //const isActive = (route: string) => router.pathname === route;
 
   return (
@@ -69,7 +73,7 @@ const Navbar: React.FC = () => {
       <Con>
         <div className="left">
           <img className="mob-ham mr-2" src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
-          <img className="cursor-pointer" src="/images/components/logo.svg" alt="img" onClick={() => Router.push(`/`)} />
+          <img className="cursor-pointer" src="/images/components/logo.png" alt="img" onClick={() => Router.push(`/`)} />
         </div>
         <div className="right flex items-center">
           <SearchCon onSubmit={handleSubmit}>
@@ -164,15 +168,18 @@ const Con = styled.div`
         padding: 20px 120px;
     }
     .left{  
-        width: 270px;
+        width: 150px;
         height: 30px; 
         display: flex;
-        align-items: center;
+        align-items: center; 
         .mob-ham{
             display: none;
             @media (max-width: 1200px) { 
                 display:block; 
             } 
+        }
+        img{
+          width: 100%; 
         }
     }
     .right{

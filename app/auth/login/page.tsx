@@ -88,8 +88,8 @@ const Login: React.FC = () => {
             </Head>
             <InnerCon>
                 <MySnackBar setSnackInfo={setSnackInfo} snackInfo={snackInfo} />
-                <div className='logo mb-3' onClick={() => Router.push(`/`)}>
-                    <img src="/images/pages/auth/logo.svg" alt="img" />
+                <div className='logo mb-3 w-[150px]' onClick={() => Router.push(`/`)}>
+                    <img src="/images/components/logo.png" className='w-[100%]' alt="img" />
                 </div>
                 <p className='sub'>Sign in or <Link href="/auth/signup">create an account</Link></p>
                 <AuthInput place="Email address" type="text" onChange={handleChange} name="email" />

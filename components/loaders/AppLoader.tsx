@@ -17,8 +17,8 @@ const AppLoader = () => {
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content="https://example.com/hero-image.jpg" />
             </Head>
-            <div className='mb-5'>
-                <img className='logo' src="/images/components/logo.svg" alt="img" />
+            <div className='mb-5 w-[150px]'>
+                <img className='logo w-[100%]' src="/images/components/logo.png" alt="img" />
             </div>
             <CircularProgress />
         </Con>
