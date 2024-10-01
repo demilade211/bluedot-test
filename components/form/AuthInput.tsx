@@ -28,10 +28,10 @@ const AuthInput: React.FC<any> = ({
   name, 
   value, 
   errors, 
-  className 
+  classs
 }) => {
   return (
-    <InputLabelContainer className={className}>
+    <InputLabelContainer className={classs}>
       <Label>{label}</Label>
       <InputContainer>
         {withIcon && <img src={image} alt="icon" />}
