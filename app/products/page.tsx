@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppLayout from '@/layouts/AppLayout';
 import styled from "styled-components";
 import MySelect from '@/components/form/MySelect';
@@ -47,7 +47,7 @@ const Products: React.FC = () => {
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const response = await getAllProduct(keyword as string || "", currentPage, category);
+            const response = await getAllProduct(keyword as string||"", currentPage, category);
             const response2 = await getCategories();
             setLoading(false);
             setProducts(response.products);
@@ -69,49 +69,47 @@ const Products: React.FC = () => {
 
     return (
         <AppLayout>
-            <Suspense fallback={<ContentLoader/>}>
-                <QuickLinkCon>
-                    <Quicklinks next="All categories" />
-                </QuickLinkCon>
-                <Con>
-                    <MySnackBar setSnackInfo={setSnackInfo} snackInfo={snackInfo} />
-                    <div className='w-full flex items-center justify-between'>
-                        <h1 className='p-head'>All categories</h1>
-                    </div>
-                    <div className='grid-con'>
-                        <Left>
-                            <div className='cat mb-5'>
-                                <p className={`${"" === category && "active"}`} onClick={() => handleOnChange("")}>All</p>
+            <QuickLinkCon>
+                <Quicklinks next="All categories" />
+            </QuickLinkCon>
+            <Con>
+                <MySnackBar setSnackInfo={setSnackInfo} snackInfo={snackInfo} />
+                <div className='w-full flex items-center justify-between'>
+                    <h1 className='p-head'>All categories</h1>
+                </div>
+                <div className='grid-con'>
+                    <Left>
+                        <div className='cat mb-5'>
+                            <p className={`${"" === category && "active"}`} onClick={() => handleOnChange("")}>All</p>
+                        </div>
+                        {categories?.map((cat, index) => (
+                            <div key={index} className='cat mb-5'>
+                                <p className={`${cat.name === category && "active"}`} onClick={() => handleOnChange(cat.name)}>{cat.name}</p>
+                                {cat.name === category && (
+                                    <div className="sub-categories">
+                                        {cat.subcategories.map((subcat, idx) => (
+                                            <p key={idx} className={`sub-category ml-3 my-2 ${subcat === subCategory && "active"}`} onClick={() => setSubCategory(subcat)}>{subcat}</p>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                            {categories?.map((cat, index) => (
-                                <div key={index} className='cat mb-5'>
-                                    <p className={`${cat.name === category && "active"}`} onClick={() => handleOnChange(cat.name)}>{cat.name}</p>
-                                    {cat.name === category && (
-                                        <div className="sub-categories">
-                                            {cat.subcategories.map((subcat, idx) => (
-                                                <p key={idx} className={`sub-category ml-3 my-2 ${subcat === subCategory && "active"}`} onClick={() => setSubCategory(subcat)}>{subcat}</p>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </Left>
-                        <Right>
-                            {loading ? <div className='no-data'><ContentLoader /></div> :
-                                products.length === 0 ?
-                                    <div className='no-data flex justify-center items-center'><p>No Result Found</p></div>
-                                    :
-                                    <>
-                                        {products.map((val, index) => <ProductCard key={index} setSnackInfo={setSnackInfo} product={val} />)}
-                                    </>
-                            }
-                        </Right>
-                    </div>
-                    <div className='pag-con flex justify-center w-full mt-6'>
-                        <Pagination count={totalPages % 2 === 0 ? Math.round(totalPages / 6) : Math.round(totalPages / 6) + 1} color="primary" onChange={handlePageChange} />
-                    </div>
-                </Con>
-            </Suspense>
+                        ))}
+                    </Left>
+                    <Right>
+                        {loading ? <div className='no-data'><ContentLoader /></div> :
+                            products.length === 0 ?
+                                <div className='no-data flex justify-center items-center'><p>No Result Found</p></div>
+                                :
+                                <>
+                                    {products.map((val, index) => <ProductCard key={index} setSnackInfo={setSnackInfo} product={val} />)}
+                                </>
+                        }
+                    </Right>
+                </div>
+                <div className='pag-con flex justify-center w-full mt-6'>
+                    <Pagination count={totalPages % 2 === 0 ? Math.round(totalPages / 6) : Math.round(totalPages / 6) + 1} color="primary" onChange={handlePageChange} />
+                </div>
+            </Con>
         </AppLayout>
     );
 };
