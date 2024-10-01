@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { StyledMenu } from '../utils/CustomStyles';
 import Avatar from '@mui/material/Avatar';
 import { stringAvatar } from "../utils/helpers";
-import { useAppSelector, useAppDispatch } from '@/redux/hooks' 
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 import { SetCurrency } from "../redux/slices/userSlice";
 import cookie from "js-cookie"
 
@@ -35,6 +35,7 @@ const Navbar: React.FC = () => {
   const open2 = Boolean(anchorEl2);
 
   const Router = useRouter();
+  const pathname = usePathname();
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -63,10 +64,13 @@ const Navbar: React.FC = () => {
 
   const logOut = () => {
     cookie.remove("token");
-    window.location.href = "/auth/login" 
-}
+    window.location.href = "/auth/login"
+  }
 
-  //const isActive = (route: string) => router.pathname === route;
+  const isActive = (route: string) => pathname === route;
+
+  console.log(isActive("/"));
+
 
   return (
     <>
@@ -115,12 +119,12 @@ const Navbar: React.FC = () => {
               <Badge badgeContent={cartValue} color="secondary">
                 <img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" />
               </Badge>
-            </div> 
+            </div>
             <div className="icon">
-              {status === "Authenticated" ? 
-                <Avatar onClick={handleClick1} {...stringAvatar(user?.name)} /> : 
+              {status === "Authenticated" ?
+                <Avatar onClick={handleClick1} {...stringAvatar(user?.name)} /> :
                 <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />}
-              
+
               <StyledMenu
                 id="basic-menu1"
                 anchorEl={anchorEl1}
@@ -145,6 +149,85 @@ const Navbar: React.FC = () => {
               </StyledMenu>
             </div>
           </div>
+        </div>
+        <div className='mobile-right'>
+          {/* <div className="icon mr-3">
+                        <img src="/images/components/Search.svg" alt="img" />
+                    </div> */}
+          <div className="icon mr-3">
+            <Badge badgeContent={cartValue} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
+          </div>
+          <div className="icon mr-3">
+            <Badge badgeContent={wishValue} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
+          </div>
+          <div className="icon">
+            {status === "Authenticated" ? <Avatar onClick={handleClick1} {...stringAvatar(user?.name)} /> : <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />}
+            <StyledMenu
+              id="basic-menu1"
+              anchorEl={anchorEl1}
+              open={open1}
+              onClose={handleClose1}
+            >
+              <MenuItem onClick={() => Router.push(`/profile`)}>Profile</MenuItem>
+              <MenuItem onClick={logOut}>Logout</MenuItem>
+            </StyledMenu>
+            <StyledMenu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <MenuItem onClick={() => Router.push(`/auth/login`)}>Login</MenuItem>
+              <MenuItem onClick={() => Router.push(`/auth/signup`)}>Sign Up</MenuItem>
+            </StyledMenu>
+          </div>
+        </div>
+        <div className={`mobile-nav ${showNav && "active"}`}>
+          <div className="close" onClick={() => setShowNav(false)} >
+            <img src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
+          </div>
+          <ul>
+            <li onClick={() => Router.push(`/`)}>Home</li>
+            <li onClick={() => Router.push(`/about`)}>About</li>
+            <li onClick={() => Router.push(`/services`)}>Services</li>
+            <li onClick={() => Router.push(`/contact`)}>Contact</li>
+          </ul>
+          <CurrencyCon onClick={(event) => setAnchorEl2(event.currentTarget)} id="basic-button">
+            <div className="flex items-center">
+              <img className="" src="/images/components/Bill.svg" alt="img" />
+              <p className="mx-2">{currency}</p>
+            </div>
+            <div className="img"><img src="/images/components/drop.svg" alt="img" /></div>
+          </CurrencyCon>
+          <StyledMenu
+            id="basic-menu"
+            anchorEl={anchorEl2}
+            open={open2}
+            onClose={() => setAnchorEl2(null)}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={() => {
+              dispatch(SetCurrency("Naira"))
+              setAnchorEl2(null)
+            }
+            }
+            >
+              Naira
+            </MenuItem>
+            <MenuItem onClick={() => {
+              dispatch(SetCurrency("Dollar"))
+              setAnchorEl2(null)
+            }}>Dollar</MenuItem>
+          </StyledMenu>
+          <SearchCon onSubmit={handleSubmit}>
+            <input type="text" placeholder="Search for a product" onChange={(e) => setKeyword(e.target.value)} />
+            <img src="/images/components/Search.svg" alt="img" />
+          </SearchCon>
         </div>
       </Con>
     </>
