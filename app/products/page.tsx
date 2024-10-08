@@ -182,6 +182,7 @@ const Right = styled.div`
     width: 100%;   
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 500px 500px 500px;
     column-gap:10px;
     row-gap: 20px;
     justify-content:center;  
@@ -191,6 +192,7 @@ const Right = styled.div`
     }
     @media (max-width: 450px) { 
       grid-template-columns: 90% ; 
+      grid-template-rows: auto auto auto;
     }
     .no-data{ 
         width: 100%;

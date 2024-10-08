@@ -28,6 +28,7 @@ const AppLoader = () => {
 const Con = styled.section`  
     width: 100%;      
     height: 100vh; 
+    max-width: 1500px;
     display: flex;
     flex-direction:column;
     align-items:center;

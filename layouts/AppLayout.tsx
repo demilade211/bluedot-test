@@ -23,6 +23,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
 
 const Con = styled.div`
   width: 100%;
+  max-width: 1500px; /* Set a max-width to limit how wide the content can get */
+  margin: 0 auto; /* Centers the content */
+  padding: 0 16px; /* Adds some space around the content */
   overflow: hidden;
 `;
 

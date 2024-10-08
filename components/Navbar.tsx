@@ -235,7 +235,8 @@ const Navbar: React.FC = () => {
 }
 
 const Con = styled.div` 
-    width:100%;     
+    width:100%;  
+    max-width: 1500px;   
     min-height: 90px;
     display: flex;
     justify-content: space-between;
